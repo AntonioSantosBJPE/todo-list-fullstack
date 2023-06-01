@@ -1,4 +1,5 @@
 import { prisma } from "@/database/prisma";
+import { hash } from "bcryptjs";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { userRegisterSchema, userReturnSchema } from "./schema";
@@ -15,7 +16,7 @@ export async function POST(request: Request) {
   try {
     const bodySerializer = userRegisterSchema.parse(body);
 
-    const findUser = await prisma.user.findFirst({
+    const findUser = await prisma.user.findUnique({
       where: {
         email: bodySerializer.email,
       },
@@ -27,7 +28,7 @@ export async function POST(request: Request) {
         { status: 409 }
       );
     }
-
+    body.password = await hash(body.password, 10);
     const newUser = await prisma.user.create({
       data: {
         ...body,
@@ -41,14 +42,14 @@ export async function POST(request: Request) {
       if (error instanceof z.ZodError)
         return NextResponse.json(
           { message: error.flatten().fieldErrors },
-          { status: 404 }
+          { status: 400 }
         );
     }
   } catch (error) {
     if (error instanceof z.ZodError)
       return NextResponse.json(
         { message: error.flatten().fieldErrors },
-        { status: 404 }
+        { status: 400 }
       );
   }
 }
