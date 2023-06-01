@@ -5,11 +5,6 @@ import { z } from "zod";
 import { userRegisterSchema, userReturnSchema } from "./schema";
 import { TuserCreateRequest } from "./types";
 
-export const GET = async () => {
-  const users = await prisma.user.findMany();
-  return NextResponse.json(users);
-};
-
 export const POST = async (request: Request) => {
   let body: TuserCreateRequest;
   try {
