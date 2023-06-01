@@ -21,6 +21,18 @@ model User {
   updatedAt DateTime @updatedAt
   isDeleted Boolean  @default(false)
 
-
+  tasks Task[]
   @@map("users")
+}
+
+
+model Task{
+  id    Int           @id @default(autoincrement())
+  title String   
+  isFinished Boolean  @default(false)
+  createdAt DateTime  @default(now())
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+
+ @@map("tasks")
 }

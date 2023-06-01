@@ -6,8 +6,13 @@ import { z } from "zod";
 import { loginSchema } from "./schema";
 import { TloginRequest } from "./types";
 
-export async function POST(request: Request) {
-  const body: TloginRequest = await request.json();
+export const POST = async (request: Request) => {
+  let body: TloginRequest;
+  try {
+    body = await request.json();
+  } catch (error) {
+    return NextResponse.json({ message: "invalid body" }, { status: 400 });
+  }
 
   try {
     const bodySerializer = loginSchema.parse(body);
@@ -57,4 +62,4 @@ export async function POST(request: Request) {
         { status: 400 }
       );
   }
-}
+};

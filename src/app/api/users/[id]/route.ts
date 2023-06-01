@@ -2,14 +2,14 @@ import { prisma } from "@/database/prisma";
 import { NextResponse } from "next/server";
 import { userReturnSchema } from "../schema";
 
-export async function GET(
+export const GET = async (
   request: Request,
   {
     params,
   }: {
     params: { id: string };
   }
-) {
+) => {
   if (isNaN(Number(params.id))) {
     return NextResponse.json({ message: "User not found" }, { status: 404 });
   }
@@ -23,4 +23,4 @@ export async function GET(
 
   const responseUser = userReturnSchema.parse(user);
   return NextResponse.json(responseUser);
-}
+};

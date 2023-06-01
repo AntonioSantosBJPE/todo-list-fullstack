@@ -5,13 +5,18 @@ import { z } from "zod";
 import { userRegisterSchema, userReturnSchema } from "./schema";
 import { TuserCreateRequest } from "./types";
 
-export async function GET() {
+export const GET = async () => {
   const users = await prisma.user.findMany();
   return NextResponse.json(users);
-}
+};
 
-export async function POST(request: Request) {
-  const body: TuserCreateRequest = await request.json();
+export const POST = async (request: Request) => {
+  let body: TuserCreateRequest;
+  try {
+    body = await request.json();
+  } catch (error) {
+    return NextResponse.json({ message: "invalid body" }, { status: 400 });
+  }
 
   try {
     const bodySerializer = userRegisterSchema.parse(body);
@@ -52,4 +57,4 @@ export async function POST(request: Request) {
         { status: 400 }
       );
   }
-}
+};
