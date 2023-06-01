@@ -5,8 +5,27 @@ import { validToken } from "../utils";
 import { taskCreateSchema } from "./schema";
 import { TtaskCreateRequest } from "./types";
 
-export const GET = async () => {
-  const tasks = await prisma.task.findMany();
+export const GET = async (request: Request) => {
+  const authToken = request.headers.get("authorization");
+
+  if (!authToken) {
+    return NextResponse.json(
+      { message: "Invalid credentials" },
+      { status: 401 }
+    );
+  }
+
+  const { jwtErrorMessage, userEmail, userId } = validToken(authToken);
+
+  if (jwtErrorMessage) {
+    return NextResponse.json({ message: jwtErrorMessage }, { status: 401 });
+  }
+
+  const tasks = await prisma.task.findMany({
+    where: {
+      userId,
+    },
+  });
   return NextResponse.json(tasks);
 };
 
