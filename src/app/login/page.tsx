@@ -1,4 +1,5 @@
 "use client";
+import { Input } from "@/components/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
@@ -55,46 +56,23 @@ const Login = () => {
             onSubmit={handleSubmit(accountLogin)}
             className="w-full max-w-sm flex flex-col gap-4"
           >
-            <div className="w-full flex flex-col gap-1">
-              <label
-                htmlFor="input-email"
-                className="text-zinc-950 text-base font-semibold pl-2"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                id="input-email"
-                placeholder="Digite seu email"
-                {...register("email")}
-                className=" w-full h-12 bg-zinc-50 border rounded-2xl px-5 py-3 placeholder:text-base placeholder:text-zinc-500"
-              />
-              {errors.email && (
-                <p className="text-sm text-red-600 pl-2">
-                  {errors.email.message}
-                </p>
-              )}
-            </div>
-            <div className="w-full flex flex-col gap-1">
-              <label
-                htmlFor="input-password"
-                className="text-zinc-950 text-base font-semibold pl-2"
-              >
-                Senha
-              </label>
-              <input
-                type="password"
-                id="input-password"
-                placeholder="Digite sua senha"
-                {...register("password")}
-                className=" w-full h-12 bg-zinc-50 border rounded-2xl px-5 py-3 placeholder:text-base placeholder:text-zinc-500"
-              />
-              {errors.password && (
-                <p className="text-sm text-red-600 pl-2">
-                  {errors.password.message}
-                </p>
-              )}
-            </div>
+            <Input
+              id="input-email"
+              labelName="Email"
+              type="email"
+              placeholder="Digite seu email"
+              linkForm={register("email")}
+              error={errors.email?.message}
+            />
+
+            <Input
+              id="input-password"
+              labelName="Senha"
+              type="password"
+              placeholder="Digite sua senha"
+              linkForm={register("password")}
+              error={errors.password?.message}
+            />
 
             <button
               type="submit"

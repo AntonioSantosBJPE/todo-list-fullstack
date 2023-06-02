@@ -1,4 +1,5 @@
 "use client";
+import { Input } from "@/components/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
@@ -60,86 +61,42 @@ const Register = () => {
             onSubmit={handleSubmit(accountRegister)}
             className="w-full max-w-sm flex flex-col gap-4"
           >
-            <div className="w-full flex flex-col gap-1">
-              <label
-                htmlFor="input-name"
-                className="text-zinc-950 text-base font-semibold pl-2"
-              >
-                Nome
-              </label>
-              <input
-                type="text"
-                id="input-name"
-                placeholder="Digite seu nome"
-                {...register("name")}
-                className=" w-full h-12 bg-zinc-50 border rounded-2xl px-5 py-3 placeholder:text-base placeholder:text-zinc-500"
-              />
-              {errors.name && (
-                <p className="text-sm text-red-600 pl-2">
-                  {errors.name.message}
-                </p>
-              )}
-            </div>
-            <div className="w-full flex flex-col gap-1">
-              <label
-                htmlFor="input-email"
-                className="text-zinc-950 text-base font-semibold pl-2"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                id="input-email"
-                placeholder="Digite seu email"
-                {...register("email")}
-                className=" w-full h-12 bg-zinc-50 border rounded-2xl px-5 py-3 placeholder:text-base placeholder:text-zinc-500"
-              />
-              {errors.email && (
-                <p className="text-sm text-red-600 pl-2">
-                  {errors.email.message}
-                </p>
-              )}
-            </div>
-            <div className="w-full flex flex-col gap-1">
-              <label
-                htmlFor="input-password"
-                className="text-zinc-950 text-base font-semibold pl-2"
-              >
-                Senha
-              </label>
-              <input
-                type="password"
-                id="input-password"
-                placeholder="Digite sua senha"
-                {...register("password")}
-                className=" w-full h-12 bg-zinc-50 border rounded-2xl px-5 py-3 placeholder:text-base placeholder:text-zinc-500"
-              />
-              {errors.password && (
-                <p className="text-sm text-red-600 pl-2">
-                  {errors.password.message}
-                </p>
-              )}
-            </div>
-            <div className="w-full flex flex-col gap-1">
-              <label
-                htmlFor="input-confirmPassword"
-                className="text-zinc-950 text-base font-semibold pl-2"
-              >
-                Confirme sua senha
-              </label>
-              <input
-                type="password"
-                id="input-confirmPassword"
-                placeholder="Confirme sua senha"
-                {...register("confirmPassword")}
-                className=" w-full h-12 bg-zinc-50 border rounded-2xl px-5 py-3 placeholder:text-base placeholder:text-zinc-500"
-              />
-              {errors.confirmPassword && (
-                <p className="text-sm text-red-600 pl-2">
-                  {errors.confirmPassword.message}
-                </p>
-              )}
-            </div>
+            <Input
+              id="input-name"
+              labelName="Nome"
+              type="text"
+              placeholder="Digite seu nome"
+              linkForm={register("name")}
+              error={errors.name?.message}
+            />
+
+            <Input
+              id="input-email"
+              labelName="Email"
+              type="email"
+              placeholder="Digite seu email"
+              linkForm={register("email")}
+              error={errors.email?.message}
+            />
+
+            <Input
+              id="input-password"
+              labelName="Senha"
+              type="password"
+              placeholder="Digite sua senha"
+              linkForm={register("password")}
+              error={errors.password?.message}
+            />
+
+            <Input
+              id="input-confirmPassword"
+              labelName="Confirme sua senha"
+              type="password"
+              placeholder="Confirme sua senha"
+              linkForm={register("confirmPassword")}
+              error={errors.confirmPassword?.message}
+            />
+
             <button
               type="submit"
               className="w-full h-14 mt-3 bg-teal-400 hover:bg-teal-300 disabled:bg-teal-600 disabled:text-zinc-500  rounded-md text-xl text-zinc-950  font-bold transition-all duration-500"
