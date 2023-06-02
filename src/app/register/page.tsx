@@ -40,13 +40,13 @@ const Register = () => {
             <h2 className="text-zinc-950 text-2xl font-bold text-center leading-8 relative z-40">
               Bem vindo!
             </h2>
-            <h2 className="text-zinc-950 text-base font-bold text-center leading-8 relative z-40">
+            <h3 className="text-zinc-950 text-base font-bold text-center leading-8 relative z-40">
               Vamos ajudá-lo a concluir suas tarefas!
-            </h2>
+            </h3>
           </div>
           <Image
             src={"/page-login-img.svg"}
-            alt="img-page-login"
+            alt="img-page-register"
             width={180}
             height={180}
             priority={true}
