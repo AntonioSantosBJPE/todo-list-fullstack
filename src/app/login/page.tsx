@@ -102,15 +102,29 @@ const Login = () => {
             >
               Login
             </button>
-            <p className="text-base text-zinc-800 font-semibold text-center leading-5">
-              Ainda não tem conta?{" "}
-              <Link
-                className="text-teal-700  hover:text-teal-600 hover:underline transition-all duration-500 "
-                href={"/register"}
-              >
-                Cadastre-se
-              </Link>
-            </p>
+            <div className=" flex flex-col gap-1 w-full">
+              <p className="text-base text-zinc-800 font-semibold text-center leading-5">
+                Ainda não tem conta?{" "}
+                <Link
+                  className="text-teal-700  hover:text-teal-600 hover:underline transition-all duration-500 "
+                  href={"/register"}
+                >
+                  Cadastre-se
+                </Link>
+              </p>
+              <p className="text-base text-zinc-800 font-semibold text-center leading-5">
+                ou
+              </p>
+              <p className="text-base text-zinc-800 font-semibold text-center leading-5">
+                Deseja voltar para página inicial?{" "}
+                <Link
+                  className="text-teal-700  hover:text-teal-600 hover:underline transition-all duration-500 "
+                  href={"/"}
+                >
+                  Home
+                </Link>
+              </p>
+            </div>
           </form>
         </div>
       </main>
