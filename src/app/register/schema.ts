@@ -9,11 +9,14 @@ export const schema = z
       .string()
       .email("Formato de email inválido")
       .max(45, "O email pode ter no máximo 45 carecteres"),
-    password: z.string().min(8).max(32),
+    password: z
+      .string()
+      .min(8, "A senha precisa conter ao menos 8 caracteres")
+      .max(32, "A senha precisa pode conter no máximo 32 caracteres"),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "As senha precisam ser iguais",
+    message: "As senhas precisam ser iguais",
     path: ["confirmPassword"],
   });
 export type TregisterUser = z.infer<typeof schema>;
