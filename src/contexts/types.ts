@@ -1,6 +1,9 @@
 import { ReactNode } from "react";
 
-export interface IauthContext {}
+export interface IauthContext {
+  udpateuserAuth: (data: IuserAuth) => void;
+  logoutUserAuth: () => void;
+}
 export interface IauthProviderProps {
   children: ReactNode;
 }

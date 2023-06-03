@@ -1,14 +1,21 @@
 "use client";
 import { Input } from "@/components/Input";
-import { IloginUser } from "@/contexts/types";
+import { Spinner } from "@/components/Spinner";
+import { AuthContext } from "@/contexts/AuthContext";
+import { IloginUser, IuserAuth } from "@/contexts/types";
 import { api } from "@/database/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { setCookie } from "nookies";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { schema, TloginUser } from "./schema";
 
 export const FormLogin = () => {
+  const { udpateuserAuth } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -19,18 +26,25 @@ export const FormLogin = () => {
   });
 
   const accountLogin = async ({ email, password }: TloginUser) => {
-    const outputLogin = await api.post<IloginUser>("/api/login", {
-      email,
-      password,
-    });
-    const { accessToken } = outputLogin.data;
-    api.defaults.headers.common.authorization = `Bearer ${accessToken}`;
-    setCookie(undefined, "@todo-list:token", accessToken, {
-      maxAge: 60 * 60 * 1,
-    });
     try {
+      setIsLoading(true);
+      const outputLogin = await api.post<IloginUser>("/api/login", {
+        email,
+        password,
+      });
+
+      const { accessToken } = outputLogin.data;
+      api.defaults.headers.common.authorization = `Bearer ${accessToken}`;
+      setCookie(undefined, "@todo-list:token", accessToken, {
+        maxAge: 60 * 60 * 1,
+      });
+      const responseProfile = await api.get<IuserAuth>("/api/profile");
+      udpateuserAuth(responseProfile.data);
+
+      router.push("/dashboard");
     } catch (error: any) {
-    } finally {
+      console.log(error);
+      setIsLoading(false);
     }
   };
   return (
@@ -60,8 +74,9 @@ export const FormLogin = () => {
       <button
         type="submit"
         className="w-full h-14 mt-3 bg-teal-400 hover:bg-teal-300 disabled:bg-teal-600 disabled:text-zinc-500  rounded-md text-xl text-zinc-950  font-bold transition-all duration-500"
+        disabled={isLoading}
       >
-        Login
+        {isLoading ? <Spinner /> : "Login"}
       </button>
       <div className=" flex flex-col gap-1 w-full">
         <p className="text-base text-zinc-800 font-semibold text-center leading-5">
