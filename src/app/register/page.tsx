@@ -1,5 +1,5 @@
 "use client";
-import { Input } from "@/components/input";
+import { Input } from "@/components/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
@@ -33,7 +33,7 @@ const Register = () => {
           width={200}
           height={200}
           priority={true}
-          className="absolute top-0 left-0 rounded-lg"
+          className="absolute top-0 left-0 rounded-lg w-auto h-auto"
         />
 
         <div className="w-full md:w-1/2 h-full my-5 flex flex-col items-center justify-center gap-5 ">
@@ -51,7 +51,7 @@ const Register = () => {
             width={180}
             height={180}
             priority={true}
-            className=" relative z-40 "
+            className=" relative z-40 w-auto h-auto"
           />
         </div>
 
