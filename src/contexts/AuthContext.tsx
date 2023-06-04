@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }: IauthProviderProps) => {
   };
 
   return (
-    <AuthContext.Provider value={{ udpateuserAuth, logoutUserAuth }}>
+    <AuthContext.Provider value={{ udpateuserAuth, logoutUserAuth, userAuth }}>
       {children}
     </AuthContext.Provider>
   );

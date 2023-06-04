@@ -1,10 +1,22 @@
-import { ReactNode } from "react";
+import { TuserReturn } from "@/app/api/users/types";
+import { Task } from "@prisma/client";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 
 export interface IauthContext {
   udpateuserAuth: (data: IuserAuth) => void;
   logoutUserAuth: () => void;
+  userAuth: IuserAuth | undefined;
 }
 export interface IauthProviderProps {
+  children: ReactNode;
+}
+
+export interface ItaskContext {
+  tasks: Task[] | undefined;
+  setTasks: Dispatch<SetStateAction<Task[] | undefined>>;
+}
+
+export interface ItaskProviderProps {
   children: ReactNode;
 }
 
@@ -12,11 +24,4 @@ export interface IloginUser {
   accessToken: string;
 }
 
-export interface IuserAuth {
-  id: number;
-  name: string;
-  email: string;
-  avatar: string | null;
-  createdAt: string;
-  updatedAt: string;
-}
+export type IuserAuth = TuserReturn;
