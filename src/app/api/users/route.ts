@@ -28,13 +28,13 @@ export const POST = async (request: Request) => {
         { status: 409 }
       );
     }
-    body.password = await hash(body.password, 10);
+    bodySerializer.password = await hash(body.password, 10);
     const newUser = await prisma.user.create({
       data: {
-        ...body,
+        ...bodySerializer,
       },
     });
-
+    console.log("neto");
     try {
       const responseUser = userReturnSchema.parse(newUser);
       return NextResponse.json(responseUser);
