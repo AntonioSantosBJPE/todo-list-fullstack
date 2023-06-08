@@ -74,6 +74,63 @@ export const PATCH = async (
         { status: 400 }
       );
   }
+};
 
-  return NextResponse.json("responseUser");
+export const DELETE = async (
+  request: Request,
+  {
+    params,
+  }: {
+    params: { id: string };
+  }
+) => {
+  if (isNaN(Number(params.id))) {
+    return NextResponse.json({ message: "Task not found" }, { status: 404 });
+  }
+
+  const authToken = request.headers.get("authorization");
+
+  if (!authToken) {
+    return NextResponse.json(
+      { message: "Invalid credentials" },
+      { status: 401 }
+    );
+  }
+
+  const { jwtErrorMessage, userEmail, userId } = validToken(authToken);
+
+  if (jwtErrorMessage) {
+    return NextResponse.json({ message: jwtErrorMessage }, { status: 401 });
+  }
+
+  try {
+    const taskFind = await prisma.task.findUnique({
+      where: { id: Number(params.id) },
+    });
+
+    if (taskFind == null) {
+      return NextResponse.json({ message: "Task not found" }, { status: 404 });
+    }
+
+    if (taskFind.userId !== userId) {
+      return NextResponse.json(
+        { message: "Insufficient permission" },
+        { status: 403 }
+      );
+    }
+
+    await prisma.task.delete({
+      where: {
+        id: taskFind.id,
+      },
+    });
+  } catch (error) {
+    if (error instanceof z.ZodError)
+      return NextResponse.json(
+        { message: error.flatten().fieldErrors },
+        { status: 400 }
+      );
+  }
+
+  return NextResponse.json("Task deleted");
 };
