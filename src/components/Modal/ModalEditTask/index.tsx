@@ -5,7 +5,7 @@ import { TaskContext } from "@/contexts/TasksContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { InputCustom } from "../../Input";
+import { InputCustom } from "../../InputCustom";
 import { schema, TeditTask } from "./schema";
 
 export const ModalEditTask = () => {

@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { setCookie } from "nookies";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { InputCustom } from "../../Input";
+import { InputCustom } from "../../InputCustom";
 import { schema, TregisterUser } from "./schema";
 
 export const FormRegister = () => {
