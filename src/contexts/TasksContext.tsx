@@ -1,4 +1,5 @@
-import { TtaskUpdateRequest } from "@/app/api/tasks/types";
+"use client";
+import { TtaskCreateRequest, TtaskUpdateRequest } from "@/app/api/tasks/types";
 import { api } from "@/database/api";
 import { Task } from "@prisma/client";
 import { createContext, useState } from "react";
@@ -9,7 +10,7 @@ export const TaskContext = createContext({} as ItaskContext);
 export const TaskProvider = ({ children }: ItaskProviderProps) => {
   const [tasks, setTasks] = useState<Task[]>();
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [modalType, setModalType] = useState<TmodalTypes>("udpateUser");
+  const [modalType, setModalType] = useState<TmodalTypes>("createTask");
   const [taskInModal, setTaskInModal] = useState<Task>();
   const [isLoadingModal, setIsLoadingModal] = useState(false);
 
@@ -42,7 +43,6 @@ export const TaskProvider = ({ children }: ItaskProviderProps) => {
 
   const updateTask = async (data: TtaskUpdateRequest) => {
     try {
-      console.log(taskInModal!.id);
       setIsLoadingModal(true);
       await api.patch(`/api/tasks/${taskInModal!.id}`, data);
 
@@ -50,6 +50,20 @@ export const TaskProvider = ({ children }: ItaskProviderProps) => {
         item.id === taskInModal!.id ? { ...item, ...data } : item
       );
       setTasks(filterTaskUpdate);
+      closeModal();
+    } catch (error) {
+      setIsLoadingModal(false);
+    } finally {
+      setIsLoadingModal(false);
+    }
+  };
+
+  const createTask = async (data: TtaskCreateRequest) => {
+    try {
+      setIsLoadingModal(true);
+      const response = await api.post<Task>(`/api/tasks/`, data);
+
+      setTasks((oldListTask) => [...oldListTask!, response.data]);
       closeModal();
     } catch (error) {
       setIsLoadingModal(false);
@@ -72,6 +86,7 @@ export const TaskProvider = ({ children }: ItaskProviderProps) => {
         setTaskInModal,
         updateTask,
         setIsLoadingModal,
+        createTask,
       }}
     >
       {children}

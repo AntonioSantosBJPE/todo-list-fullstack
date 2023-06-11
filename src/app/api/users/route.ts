@@ -34,7 +34,7 @@ export const POST = async (request: Request) => {
         ...bodySerializer,
       },
     });
-    console.log("neto");
+
     try {
       const responseUser = userReturnSchema.parse(newUser);
       return NextResponse.json(responseUser);

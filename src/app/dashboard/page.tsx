@@ -17,7 +17,7 @@ const Dashboard = () => {
   const [loadingFullPage, setLoadingFullPage] = useState(false);
 
   const { logoutUserAuth, userAuth, udpateuserAuth } = useContext(AuthContext);
-  const { tasks, setTasks, deleteTask, openModal } = useContext(TaskContext);
+  const { tasks, setTasks, openModal } = useContext(TaskContext);
 
   const router = useRouter();
 
@@ -60,7 +60,7 @@ const Dashboard = () => {
 
   return (
     <div className="w-full min-h-screen bg-gradient-to-r from-cyan-300 via-sky-400 to-teal-500 flex items-center  p-2.5 ">
-      <main className="relative w-full max-w-screen-lg h-full mx-auto my-0 bg-zinc-100  flex flex-col  items-center justify-center gap-7 px-3 py-12 rounded-lg">
+      <main className="relative w-full max-w-screen-lg h-full mx-auto my-0 bg-zinc-100  flex flex-col  items-center justify-center  px-3 py-12 rounded-lg">
         <Image
           src={"/shape-img.svg"}
           alt="img-shape"
@@ -71,7 +71,7 @@ const Dashboard = () => {
         />
         {loadingFullPage ? (
           <>
-            <section className="border relative w-full h-72 flex flex-col items-center justify-center gap-3 p-2">
+            <section className="relative w-full h-72 flex flex-col items-center justify-center gap-3 p-2">
               <div className="w-28 h-28 bg-teal-400 rounded-full flex items-center justify-center">
                 <span className="text-8xl">
                   {userAuth?.name[0].toLocaleUpperCase()}
@@ -95,7 +95,7 @@ const Dashboard = () => {
               </button>
             </section>
 
-            <section className="border w-full h-fit p-2 flex flex-col items-center justify-center gap-2">
+            <section className=" w-full h-fit p-2 flex flex-col items-center justify-center gap-2">
               <Image
                 src={"/watch-img.svg"}
                 alt="img-watch"
@@ -109,7 +109,20 @@ const Dashboard = () => {
                 Lista de tarefas
               </h2>
 
-              <ul className="border relative bg-zinc-50 w-full h-fit p-3 flex flex-col gap-2 rounded-lg">
+              <button
+                className="w-32 h-10 p-2 border rounded-lg border-teal-500 hover:border-teal-400 hover:scale-90 flex justify-center items-center gap-2 transition-all ease-in duration-500"
+                onClick={() => openModal("createTask")}
+              >
+                <Image
+                  src={"/icon-add.svg"}
+                  alt="edit contact"
+                  width={25}
+                  height={25}
+                />
+                Criar task
+              </button>
+
+              <ul className=" relative bg-zinc-50 w-full h-fit p-3 flex flex-col gap-2 rounded-lg">
                 {tasks?.map((task) => (
                   <li
                     className="w-full flex  overflow-x-auto p-2 border rounded-lg border-teal-500"

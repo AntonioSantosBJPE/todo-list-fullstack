@@ -1,4 +1,4 @@
-import { TtaskUpdateRequest } from "@/app/api/tasks/types";
+import { TtaskCreateRequest, TtaskUpdateRequest } from "@/app/api/tasks/types";
 import { TuserReturn } from "@/app/api/users/types";
 import { Task } from "@prisma/client";
 import { Dispatch, ReactNode, SetStateAction } from "react";
@@ -25,6 +25,7 @@ export interface ItaskContext {
   setTaskInModal: Dispatch<SetStateAction<Task | undefined>>;
   updateTask: (data: TtaskUpdateRequest) => Promise<void>;
   setIsLoadingModal: Dispatch<SetStateAction<boolean>>;
+  createTask: (data: TtaskCreateRequest) => Promise<void>;
 }
 
 export interface ItaskProviderProps {
@@ -36,4 +37,4 @@ export interface IloginUser {
 }
 
 export type IuserAuth = TuserReturn;
-export type TmodalTypes = "udpateUser" | "updateTask" | "deleteTask";
+export type TmodalTypes = "createTask" | "updateTask" | "deleteTask";

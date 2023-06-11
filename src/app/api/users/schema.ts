@@ -27,3 +27,5 @@ export const userReturnSchema = userSchema.omit({
   password: true,
   isDeleted: true,
 });
+
+export const userUpdateSchema = userRegisterSchema.partial();

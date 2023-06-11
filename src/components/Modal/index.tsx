@@ -3,6 +3,7 @@ import { TaskContext } from "@/contexts/TasksContext";
 import Image from "next/image";
 import { useContext } from "react";
 import Modal from "react-modal";
+import { ModalCreateTask } from "./ModalCreateTask";
 import { ModalDeleteTask } from "./ModalDeleteTask";
 import { ModalEditTask } from "./ModalEditTask";
 
@@ -52,6 +53,7 @@ export const ModalCustom = () => {
         <div>
           {modalType == "deleteTask" && <ModalDeleteTask />}
           {modalType == "updateTask" && <ModalEditTask />}
+          {modalType == "createTask" && <ModalCreateTask />}
         </div>
       </div>
     </Modal>
