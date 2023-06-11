@@ -1,3 +1,4 @@
+"use client";
 import { Input } from "@/components/Input";
 import { Spinner } from "@/components/Spinner";
 import { AuthContext } from "@/contexts/AuthContext";
