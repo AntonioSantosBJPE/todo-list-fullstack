@@ -40,13 +40,22 @@ export const TaskProvider = ({ children }: ItaskProviderProps) => {
     }
   };
 
-  const updateTask = async (task: Task, data: TtaskUpdateRequest) => {
-    await api.patch(`/api/tasks/${task.id}`, data);
+  const updateTask = async (data: TtaskUpdateRequest) => {
+    try {
+      console.log(taskInModal!.id);
+      setIsLoadingModal(true);
+      await api.patch(`/api/tasks/${taskInModal!.id}`, data);
 
-    const filterTaskUpdate = tasks?.map((item) =>
-      item.id === task.id ? { ...item, ...data } : item
-    );
-    setTasks(filterTaskUpdate);
+      const filterTaskUpdate = tasks?.map((item) =>
+        item.id === taskInModal!.id ? { ...item, ...data } : item
+      );
+      setTasks(filterTaskUpdate);
+      closeModal();
+    } catch (error) {
+      setIsLoadingModal(false);
+    } finally {
+      setIsLoadingModal(false);
+    }
   };
   return (
     <TaskContext.Provider
@@ -59,6 +68,10 @@ export const TaskProvider = ({ children }: ItaskProviderProps) => {
         openModal,
         closeModal,
         isLoadingModal,
+        taskInModal,
+        setTaskInModal,
+        updateTask,
+        setIsLoadingModal,
       }}
     >
       {children}

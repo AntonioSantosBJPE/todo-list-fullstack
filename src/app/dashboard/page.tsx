@@ -115,12 +115,15 @@ const Dashboard = () => {
                     className="w-full flex  overflow-x-auto p-2 border rounded-lg border-teal-500"
                     key={task.id}
                   >
-                    <Checkbox
-                      checked={task.isFinished}
-                      id={`checkbox-${task.id}`}
-                    />
+                    <Checkbox task={task} />
                     <div className="w-full flex flex-col gap-2">
-                      <h4 className="text-zinc-950 font-bold text-base">
+                      <h4
+                        className={
+                          task.isFinished
+                            ? "text-zinc-950 font-bold text-base line-through"
+                            : "text-zinc-950 font-bold text-base"
+                        }
+                      >
                         {task.title}
                       </h4>
                       <div className="w-full flex flex-col sm:flex-row sm:justify-between gap-2 ">
@@ -130,7 +133,7 @@ const Dashboard = () => {
                         <div className="flex gap-2 ">
                           <button
                             className="w-24 h-10 p-2 border rounded-lg border-teal-500 hover:border-teal-400 hover:scale-90 flex justify-center items-center gap-2 transition-all ease-in duration-500"
-                            onClick={() => openModal("udpateUser", task)}
+                            onClick={() => openModal("updateTask", task)}
                           >
                             <Image
                               src={"/icon-edit.svg"}

@@ -3,7 +3,8 @@ import { TaskContext } from "@/contexts/TasksContext";
 import Image from "next/image";
 import { useContext } from "react";
 import Modal from "react-modal";
-import { Spinner } from "../Spinner";
+import { ModalDeleteTask } from "./ModalDeleteTask";
+import { ModalEditTask } from "./ModalEditTask";
 
 const customStyles = {
   overlay: {
@@ -49,21 +50,8 @@ export const ModalCustom = () => {
           </button>
         </header>
         <div>
-          {modalType == "deleteTask" && (
-            <div className="h-fit  w-full  overflow-auto">
-              <h2 className="text-xl text-center">
-                Deseja realmente apagar a task?
-              </h2>
-              <button
-                className="w-full h-14 mt-3 bg-teal-400 hover:bg-teal-300 disabled:bg-teal-600 disabled:text-zinc-500 disabled:cursor-progress  rounded-md text-xl text-zinc-950  font-bold transition-all duration-500"
-                disabled={isLoadingModal}
-                onClick={deleteTask}
-              >
-                {isLoadingModal ? <Spinner /> : "Apagar task"}
-              </button>
-            </div>
-          )}
-          {/* {modalType == "imageCar" && <div> </div>} */}
+          {modalType == "deleteTask" && <ModalDeleteTask />}
+          {modalType == "updateTask" && <ModalEditTask />}
         </div>
       </div>
     </Modal>

@@ -18,4 +18,4 @@ export const taskUpdateSchema = taskSchema
     id: true,
     createdAt: true,
   })
-  .optional();
+  .partial();
