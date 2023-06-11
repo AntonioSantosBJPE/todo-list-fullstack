@@ -1,4 +1,5 @@
 "use client";
+
 import { FormLogin } from "@/components/Forms/FormLogin";
 import { AuthProvider } from "@/contexts/AuthContext";
 import Image from "next/image";
