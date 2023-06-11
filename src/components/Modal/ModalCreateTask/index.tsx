@@ -1,12 +1,12 @@
 "use client";
 import { taskCreateSchema } from "@/app/api/tasks/schema";
 import { TtaskCreateRequest } from "@/app/api/tasks/types";
-import { InputCustom } from "@/components/Input";
 import { Spinner } from "@/components/Spinner";
 import { TaskContext } from "@/contexts/TasksContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { InputCustom } from "../../Input";
 
 export const ModalCreateTask = () => {
   const { isLoadingModal, createTask } = useContext(TaskContext);

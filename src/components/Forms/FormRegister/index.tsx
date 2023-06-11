@@ -1,5 +1,4 @@
 "use client";
-import { InputCustom } from "@/components/Input";
 import { Spinner } from "@/components/Spinner";
 import { AuthContext } from "@/contexts/AuthContext";
 import { IloginUser, IuserAuth } from "@/contexts/types";
@@ -10,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { setCookie } from "nookies";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import { InputCustom } from "../../Input";
 import { schema, TregisterUser } from "./schema";
 
 export const FormRegister = () => {
