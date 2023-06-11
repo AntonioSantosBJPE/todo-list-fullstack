@@ -13,7 +13,9 @@ export const taskCreateSchema = taskSchema.omit({
   isFinished: true,
 });
 
-export const taskUpdateSchema = taskSchema.omit({
-  id: true,
-  createdAt: true,
-});
+export const taskUpdateSchema = taskSchema
+  .omit({
+    id: true,
+    createdAt: true,
+  })
+  .optional();

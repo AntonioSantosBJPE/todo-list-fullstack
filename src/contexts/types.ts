@@ -14,6 +14,12 @@ export interface IauthProviderProps {
 export interface ItaskContext {
   tasks: Task[] | undefined;
   setTasks: Dispatch<SetStateAction<Task[] | undefined>>;
+  deleteTask: () => Promise<void>;
+  modalIsOpen: boolean;
+  modalType: TmodalTypes;
+  openModal: (type: TmodalTypes, task?: Task | undefined) => void;
+  closeModal: () => void;
+  isLoadingModal: boolean;
 }
 
 export interface ItaskProviderProps {
@@ -25,3 +31,4 @@ export interface IloginUser {
 }
 
 export type IuserAuth = TuserReturn;
+export type TmodalTypes = "udpateUser" | "updateTask" | "deleteTask";

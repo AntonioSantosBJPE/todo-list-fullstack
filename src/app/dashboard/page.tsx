@@ -1,6 +1,7 @@
 "use client";
 
 import { Checkbox } from "@/components/Checkbox";
+import { ModalCustom } from "@/components/Modal";
 import { Spinner } from "@/components/Spinner";
 import { AuthContext } from "@/contexts/AuthContext";
 import { TaskContext } from "@/contexts/TasksContext";
@@ -16,7 +17,7 @@ const Dashboard = () => {
   const [loadingFullPage, setLoadingFullPage] = useState(false);
 
   const { logoutUserAuth, userAuth, udpateuserAuth } = useContext(AuthContext);
-  const { tasks, setTasks } = useContext(TaskContext);
+  const { tasks, setTasks, deleteTask, openModal } = useContext(TaskContext);
 
   const router = useRouter();
 
@@ -127,7 +128,10 @@ const Dashboard = () => {
                           {new Date(task.createdAt).toLocaleDateString("pt-BR")}
                         </p>
                         <div className="flex gap-2 ">
-                          <button className="w-24 h-10 p-2 border rounded-lg border-teal-500 hover:border-teal-400 hover:scale-90 flex justify-center items-center gap-2 transition-all ease-in duration-500">
+                          <button
+                            className="w-24 h-10 p-2 border rounded-lg border-teal-500 hover:border-teal-400 hover:scale-90 flex justify-center items-center gap-2 transition-all ease-in duration-500"
+                            onClick={() => openModal("udpateUser", task)}
+                          >
                             <Image
                               src={"/icon-edit.svg"}
                               alt="edit contact"
@@ -136,7 +140,10 @@ const Dashboard = () => {
                             />
                             Editar
                           </button>
-                          <button className="w-24 h-10 p-2 border rounded-lg border-teal-500 hover:border-teal-400 hover:scale-90 flex justify-center items-center gap-2 transition-all ease-in duration-500">
+                          <button
+                            className="w-24 h-10 p-2 border rounded-lg border-teal-500 hover:border-teal-400 hover:scale-90 flex justify-center items-center gap-2 transition-all ease-in duration-500"
+                            onClick={() => openModal("deleteTask", task)}
+                          >
                             <Image
                               src={"/icon-delete.svg"}
                               alt="delete contact"
@@ -157,6 +164,7 @@ const Dashboard = () => {
           <Spinner />
         )}
       </main>
+      <ModalCustom />
     </div>
   );
 };
