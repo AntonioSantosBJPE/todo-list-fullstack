@@ -1,5 +1,5 @@
 "use client";
-import { Input } from "@/components/Input";
+import { InputCustom } from "@/components/Input";
 import { Spinner } from "@/components/Spinner";
 import { AuthContext } from "@/contexts/AuthContext";
 import { IloginUser, IuserAuth } from "@/contexts/types";
@@ -60,7 +60,7 @@ export const FormRegister = () => {
       onSubmit={handleSubmit(accountRegister)}
       className="w-full max-w-sm flex flex-col gap-4"
     >
-      <Input
+      <InputCustom
         id="input-name"
         labelName="Nome"
         type="text"
@@ -69,7 +69,7 @@ export const FormRegister = () => {
         error={errors.name?.message}
       />
 
-      <Input
+      <InputCustom
         id="input-email"
         labelName="Email"
         type="email"
@@ -78,7 +78,7 @@ export const FormRegister = () => {
         error={errors.email?.message}
       />
 
-      <Input
+      <InputCustom
         id="input-password"
         labelName="Senha"
         type="password"
@@ -87,7 +87,7 @@ export const FormRegister = () => {
         error={errors.password?.message}
       />
 
-      <Input
+      <InputCustom
         id="input-confirmPassword"
         labelName="Confirme sua senha"
         type="password"

@@ -11,7 +11,7 @@ interface iInput {
   error?: any;
 }
 
-export const Input = ({
+export const InputCustom = ({
   type,
   id,
   labelName,

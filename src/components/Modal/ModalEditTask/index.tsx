@@ -1,5 +1,6 @@
 "use client";
-import { Input } from "@/components/Input";
+
+import { InputCustom } from "@/components/Input";
 import { Spinner } from "@/components/Spinner";
 import { TaskContext } from "@/contexts/TasksContext";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -33,7 +34,7 @@ export const ModalEditTask = () => {
         onSubmit={handleSubmit(submitEditTask)}
         className="w-full  flex flex-col gap-4"
       >
-        <Input
+        <InputCustom
           id="input-title"
           labelName="Título"
           type="text"

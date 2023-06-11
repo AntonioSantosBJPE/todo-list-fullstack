@@ -1,7 +1,7 @@
 "use client";
 import { taskCreateSchema } from "@/app/api/tasks/schema";
 import { TtaskCreateRequest } from "@/app/api/tasks/types";
-import { Input } from "@/components/Input";
+import { InputCustom } from "@/components/Input";
 import { Spinner } from "@/components/Spinner";
 import { TaskContext } from "@/contexts/TasksContext";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -31,7 +31,7 @@ export const ModalCreateTask = () => {
         onSubmit={handleSubmit(submitCreateTask)}
         className="w-full  flex flex-col gap-4"
       >
-        <Input
+        <InputCustom
           id="input-title"
           labelName="Título"
           type="text"

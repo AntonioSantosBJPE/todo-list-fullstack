@@ -1,5 +1,5 @@
 "use client";
-import { Input } from "@/components/Input";
+import { InputCustom } from "@/components/Input";
 import { Spinner } from "@/components/Spinner";
 import { AuthContext } from "@/contexts/AuthContext";
 import { IloginUser, IuserAuth } from "@/contexts/types";
@@ -53,7 +53,7 @@ export const FormLogin = () => {
       onSubmit={handleSubmit(accountLogin)}
       className="w-full max-w-sm flex flex-col gap-4"
     >
-      <Input
+      <InputCustom
         id="input-email"
         labelName="Email"
         type="email"
@@ -62,7 +62,7 @@ export const FormLogin = () => {
         error={errors.email?.message}
       />
 
-      <Input
+      <InputCustom
         id="input-password"
         labelName="Senha"
         type="password"
