@@ -11,7 +11,6 @@ export const userSchema = z.object({
     .email("Formato de email inválido")
     .max(45, "O email pode ter no máximo 45 carecteres"),
   password: z.string().min(8).max(32),
-  avatar: z.string().nullish(),
   createdAt: z.date(),
   updatedAt: z.date(),
   isDeleted: z.boolean(),
@@ -28,3 +27,5 @@ export const userReturnSchema = userSchema.omit({
   password: true,
   isDeleted: true,
 });
+
+export const userUpdateSchema = userRegisterSchema.partial();

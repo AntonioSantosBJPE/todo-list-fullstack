@@ -11,7 +11,7 @@ const Home = () => {
           width={200}
           height={200}
           priority={true}
-          className="absolute top-0 left-0 rounded-lg"
+          className="absolute top-0 left-0 rounded-lg w-auto h-auto"
         />
 
         <div className="w-full md:w-1/2 h-full my-5 flex flex-col items-center justify-center gap-1 ">
@@ -37,7 +37,7 @@ const Home = () => {
             width={180}
             height={180}
             priority={true}
-            className=" relative z-40"
+            className=" relative z-40 w-auto h-auto"
           />
           <div className=" flex flex-col gap-1 w-full">
             <p className="text-base text-zinc-800 font-semibold text-center leading-5">
